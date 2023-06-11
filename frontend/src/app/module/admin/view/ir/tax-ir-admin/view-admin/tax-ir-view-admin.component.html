@@ -1,0 +1,78 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'taxIrTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'taxIrTabPan' | translate}}">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Anne' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Anne' | translate}}" [(ngModel)]="item.anne"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Mois' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Mois' | translate}}" [(ngModel)]="item.mois"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Societe' | translate}}</label>
+                        <p-dropdown [options]="societes" [(ngModel)]="item.societe" id="3" [disabled]="true" optionLabel="ice" placeholder="{{'Societe' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Montant base total' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Montant base total' | translate}}" [(ngModel)]="item.montantBaseTotal"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Montant retard total' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Montant retard total' | translate}}" [(ngModel)]="item.montantRetardTotal"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Salaire totale' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'Salaire totale' | translate}}" [(ngModel)]="item.salaireTotale"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Cotisation total' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'Cotisation total' | translate}}" [(ngModel)]="item.cotisationTotal"></p-inputNumber>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="taxIrTaxeIrEmployes">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.taxeIrEmployes" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Salaire net</th>
+                                        <th>Salaire brut</th>
+                                        <th>Employe</th>
+                                        <th>Taux ir</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.salaireNet}}</td>
+                                        <td>{{p.salaireBrut}}</td>
+                                        <td>{{p.employe?.cnss}}</td>
+                                        <td>{{p.tauxIr?.id}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

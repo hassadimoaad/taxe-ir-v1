@@ -1,0 +1,152 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'taxIrTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'taxIrTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="1">{{'taxIrAnne' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="1"
+                                                           placeholder="{{'taxIrAnne' | translate}}" [(ngModel)]="item.anne"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="2">{{'taxIrMois' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="2"
+                                                           placeholder="{{'taxIrMois' | translate}}" [(ngModel)]="item.mois"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-3">
+                                            <label for="3">{{'taxIrSociete' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="societes" [(ngModel)]="item.societe" id="3"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ice" placeholder="{{'taxIrSociete' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="4">{{'taxIrMontantBaseTotal' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="4"
+                                                           placeholder="{{'taxIrMontantBaseTotal' | translate}}" [(ngModel)]="item.montantBaseTotal"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'taxIrMontantRetardTotal' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="5"
+                                                           placeholder="{{'taxIrMontantRetardTotal' | translate}}" [(ngModel)]="item.montantRetardTotal"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="6">{{'taxIrSalaireTotale' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="6"
+                                                           placeholder="{{'taxIrSalaireTotale' | translate}}" [(ngModel)]="item.salaireTotale"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="7">{{'taxIrCotisationTotal' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="7"
+                                                           placeholder="{{'taxIrCotisationTotal' | translate}}" [(ngModel)]="item.cotisationTotal"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                        </div>
+                    </p-tabPanel>
+
+                            <p-tabPanel header="taxIrTaxeIrEmployes">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Salaire net</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="salaireNet" [(ngModel)]="taxeIrEmployesElement.salaireNet" placeholder="Salaire net"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Salaire brut</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="salaireBrut" [(ngModel)]="taxeIrEmployesElement.salaireBrut" placeholder="Salaire brut"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Employe</label>
+                                                                <p-dropdown appendTo="body" [options]="employes" [(ngModel)]="taxeIrEmployesElement.employe"
+                                                                        id="3"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="cnss" placeholder="Employe"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Taux ir</label>
+                                                                <p-dropdown appendTo="body" [options]="tauxIrs" [(ngModel)]="taxeIrEmployesElement.tauxIr"
+                                                                        id="4"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="id" placeholder="Taux ir"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateTauxIr('TauxIr')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addTaxeIrEmployes()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.taxeIrEmployes?.length > 0 ? '(' + item.taxeIrEmployes?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.taxeIrEmployes" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Salaire net</th>
+                                                                        <th>Salaire brut</th>
+                                                                        <th>Employe</th>
+                                                                        <th>Taux ir</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.salaireNet}}</td>
+                                                                        <td>{{p.salaireBrut}}</td>
+                                                                    <td>{{p.employe?.cnss}}</td>
+                                                                    <td>{{p.tauxIr?.id}}</td>
+                                                            <td>
+                                                                <button (click)="deleteTaxIrEmploye(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editTaxIrEmploye(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+                            <app-taux-ir-create-admin></app-taux-ir-create-admin>
+
+    </p-dialog>
